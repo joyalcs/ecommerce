@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">Shop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                {% for link in links %}
+                    <li class="nav-item me-2">
+                        <a class="nav-link" href="{{ link.get_url }}">{{ link.name }}</a>
+                    </li>
+                {% endfor %}
+                <li class="nav-item active ">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+
+
+            </ul>
+
+        </div>
+        <form action="{%url 'shopapp:search'%}" method="GET" style="width:250px;" class="me-5">
+            {% csrf_token %}
+                <input class="form-control" style="width:200px; float:left" type="search" name="q" placeholder="Search here..." required="">
+                <button class="btn1 mt-1" style=" float:right" type="submit">
+                        <i class="fas fa-search"></i>
+                </button>
+                <div class="clearfix"> </div>
+            </form>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'shopapp:cart-items' %}">My Cart({{request.session.cart_data_obj|length}})</a>
+                </li>
+
+            </ul>
+    </div>
+</nav>

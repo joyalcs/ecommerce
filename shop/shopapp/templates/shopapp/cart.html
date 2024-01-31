@@ -1,0 +1,80 @@
+{% extends "home_base.html" %}
+{% load static %}
+{% block content %}
+	<!--checkout-->
+	<section id="cart-products" class="banner-bottom-wthreelayouts py-lg-5 ">
+		<div class="container">
+			<div class="inner-sec-shop px-lg-4">
+				<h3 class="my-lg-4 mt-3">Cart </h3>
+				<div class="checkout-right">
+					<h4>Your shopping cart contains:
+						<span>{{totalcartitems}} Products</span>
+					</h4>
+					<table class="table">
+						<thead>
+							<tr>
+								<th scope="col">SL No.</th>
+								<th scope="col">Product</th>
+								<th scope="col">Quantity</th>
+								<th scope="col">Product Name</th>
+
+								<th scope="col">Price</th>
+                                <th scope="col">Total</th>
+								<th scope="col">Remove</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for product_id, item in data.items %}
+							<tr class="rem1">
+                                <td class="invert">{{item.qty}}</td>
+                                <td class="invert-image">
+                                    {% comment %} <a href="{% url "core:single-product" product_id%}"> {% endcomment %}
+                                        <img src="{{item.image}}" alt=" "  width="30px" class="img-responsive">
+                                    {% comment %} </a> {% endcomment %}
+                                </td>
+                                <td class="invert">
+                                    <div class="quantity">
+                                        <div class="quantity-select">
+                                            <div class="entry value">
+                                                <span>{{item.qty}}</span>
+                                            </div>
+                                            {% comment %} <div class="entry value-plus active">&nbsp;</div> {% endcomment %}
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="invert">{{item.name}}</td>
+
+                                <td class="invert">Rs.{{item.price}}</td>
+                                <td class="invert">Rs.{% widthratio item.price 1 item.qty%}</td>
+                                <td class="invert">
+                                    <div class="rem">
+                                        <button class="btn btn-danger delete-product" style="border:None;" data-product="{{ product_id}}">Delete</button>
+                                    </div>
+
+                                </td>
+                            </tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="checkout-left row">
+					<div class="col-md-4 ">
+						<h4>Continue to basket</h4>
+						<ul class="list-unstyled">
+							<li>Total Service Charges
+								<i>-</i>
+								<span>Rs 0</span>
+							</li>
+							<li>Total
+								<i>-</i>
+								<span>{{cart_total_price}}</span>
+							</li>
+                            <li><button class="btn btn-primary mt-2" type="submit">checkout</button></li>
+						</ul>
+					</div>
+
+
+    </div>
+</section>
+	<!--//checkout-->
+{% endblock content %}

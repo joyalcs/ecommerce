@@ -1,0 +1,50 @@
+{% load static%}
+ {% comment %} {% block metadescription %}
+    {% if category%}
+        {% comment %} {{category.description|truncatewords:155}} {% endcomment %}
+    {% comment %} {% else %}
+        Welcome to the Shop
+    {% endif %}
+{% endblock %} {% endcomment %} 
+{% block title%}
+    {% if category%}
+        {{category.name}}
+    {% else %}
+        Welcome to the Shop
+    {% endif %}
+{% endblock%}
+{%block content%}
+    {% if category%}
+        <div>
+            <div class='row all_cat_row'>
+                <div class='mx-auto'>
+                <p class=text-center><a href={% url 'shopapp:all_categories'%}>Our Categories</a></p>
+            </div></div>
+        </div>
+    {% endif %}
+    <div class='mx-auto'>
+        {% if category %}
+            <img class='my-img' src='{{category.image.url}}' alt="{{category.name}}" width="1270px" height="600px"/>
+
+    </div><br/>
+    <div>
+        <h1 class='text-center cat_name'>{{category.name}}</h1>
+        <p class='text-justify-center cat_des'>{{category.description}}</p>
+    </div>
+        {%endif%}
+    <div class='container'>
+        <div class='row mx-auto'>
+            {% for product in products%}
+            <div class='bot_margin col-9 col-sm-12 col-md-4 xol-md-4'>
+                <div class='card text-center' style='min-width:18rem;'>
+                    <a href="{{product.get_url}}"><img class='card-img-top ca-img' src='{{product.image.url}}' alt='{{product.name}}'/></a>
+                    <div class='card-body'>
+                        <h4 class='text-justify-center'>{{product.name}}</h4>
+                        <p class='text-justify-center'>{{product.price}}</p>
+                    </div>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+{%endblock%}

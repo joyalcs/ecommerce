@@ -1,0 +1,36 @@
+.nav-item, .dropdown-item{
+    letter-spacing: .2em;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.my-footer{
+    background-color: #f8f9fa;
+    height: 60px;
+}
+
+.my-footer p {
+    padding-top: 20px;
+    font-size: 14px;
+}
+ /* category */
+
+.all_cat_row{
+    padding-top: 15px;
+
+}
+
+.all_cat_row .mx-auto{
+    color: black;
+    font-size: 12px;
+}
+
+.bot_margin{
+    margin-bottom: 10px;
+}
+
+.card-body h4{
+        letter-spacing: .2em;
+        font-size: 14px;
+        text-transform: uppercase;
+}
