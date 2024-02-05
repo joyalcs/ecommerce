@@ -4,7 +4,7 @@ from django.views import View
 from .models import Category, Product
 from django.template.loader import render_to_string
 from django.core.exceptions import ObjectDoesNotExist
-
+from django.core.paginator import Paginator, EmptyPage, InvalidPage, PageNotAnInteger
 
 # Create your views here.
 
@@ -37,10 +37,19 @@ def AllCategories(request, c_slug=None):
             products = Product.objects.filter(category=c_page, available=True)
         else:
             products = Product.objects.filter(available=True)
+        paginator = Paginator(products, 9)
+        page = request.GET.get('page')
+        try:
+            products = paginator.page(page)
+        except PageNotAnInteger:
+            products = paginator.page(1)
+        except EmptyPage:
+            products = paginator.page(paginator.num_pages)
 
         context = {
             'category': c_page,
             'products': products,
+            'page': page,
         }
         return render(request, 'shopapp/home.html', context=context)
 

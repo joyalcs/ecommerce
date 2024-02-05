@@ -14,9 +14,14 @@
     {% endif %}
 {% endblock%}
 {%block content%}
+<div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center mb-3">
+    <div style="min-width:18rem">
+      <img src="https://img.freepik.com/free-photo/rendering-smart-home-device_23-2151039378.jpg?t=st=1707115284~exp=1707118884~hmac=67c3b7cee6f4a997b4a6ee4e7748d15fb1dc6e14935859fae71e6691467261c3&w=1060" width="1700px";" height="450;" >
+    </div>
+  </div>
     {% if category%}
         <div>
-            <div class='row all_cat_row'>
+            <div class='row all_cat_row '>
                 <div class='mx-auto'>
                 <p class=text-center><a href={% url 'shopapp:all_categories'%}>Our Categories</a></p>
             </div></div>
@@ -46,5 +51,8 @@
             </div>
             {%endfor%}
         </div>
+        <br>
+        <center>{% include 'shopapp/paginator.html' with page=products %}
+        </center>
     </div>
 {%endblock%}
