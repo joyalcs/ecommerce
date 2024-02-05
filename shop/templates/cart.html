@@ -169,7 +169,7 @@ This is the CART page.proceed to your review and items
                         <td>
                             {{ cart_item.product.name }}<br>
                             SKU: {{ cart_item.product.id }}<br>
-                            Price: ${{ cart_item.product.price }}
+                            Price: Rs.{{ cart_item.product.price }}
                         </td>
                         <td>${{ cart_item.product.price }}</td>
                         <td>{{ cart_item.quantity }}</td>
@@ -191,7 +191,7 @@ This is the CART page.proceed to your review and items
             </div>
             <div class="text-center">
                 <p>Please review your shopping cart items before proceeding with the payment</p>
-                <p><strong>Your total amount is: ${{ total }}</strong></p>
+                <p><strong>Your total amount is: Rs.{{ total }}</strong></p>
                 <button class="btn btn-primary">Pay</button>
                 <br><br>
                 <a href="{% url 'shopapp:all_categories' %}" class="btn btn-secondary">Continue Shopping</a>
