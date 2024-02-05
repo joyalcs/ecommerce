@@ -10,9 +10,6 @@ urlpatterns = [
     path('', views.AllCategories, name='all_categories'),
     path('categories/<slug:c_slug>/', views.AllCategories, name='cat_products'),
     path('<slug:c_slug>/<slug:product_slug>/', views.ProductDetail, name='product'),
-    path('add-to-cart/', views.Add_to_cart, name="add-to_cart"),
-    path('cart/', views.cart_items, name="cart-items"),
-    path('delete-product-from-cart/', views.cart_items_delete, name="delete-product-from-cart"),
     path('search/', views.SearchView, name='search'),
 ]
 if settings.DEBUG:

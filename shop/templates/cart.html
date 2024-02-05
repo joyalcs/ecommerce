@@ -1,0 +1,203 @@
+{% extends 'home_base.html' %}
+{% comment %}
+{% load static %}
+{% block metadescription %}
+
+This is the CART page.proceed to your review and items
+{% endblock %}
+
+{% block title %}
+   Shop
+{% endblock %}
+
+{% block content %}
+{% if not cart_items %}
+<div xmlns="http://www.w3.org/1999/html">
+    <div class="text-center">
+        <br>
+        <h1 class="text-center my_title">your shoping cart is empty</h1>
+        <br>
+        <p class="text_center">
+            Please click <a href="{% url 'shopapp:all_categories' %}">Here</a>to continue shopping
+        </p>
+
+    </div>
+</div>
+{% else %}
+<div style="background-color: #fff;">
+    <div class="text-center">
+        <br>
+        <h1 class="text-center my_title">Your shopping cart</h1>
+        <br>
+    </div>
+<div class="row-mx-auto" style="background-color: #fff;">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 center ">
+        <table class="table my_cuctome_table center">
+            <thead class="my_custome_thead thead-dark">
+            <tr>
+                <th colspan="2" style="padding-left:100px;">
+                    Your items
+                </th>
+                <th colspan="3">
+                    price
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for cart_item in cart_items %}
+            <tr>
+                <td>
+<img src="{{cart_item.product.image.url}}" alt="" class="float-left rounded custome_image" width="100" height="100">
+                </td>
+                <td class="text-lef" style="background-color: #fff;">
+                    {{cart_item.product.name}}
+                    <br>
+                    SKU: {{cart_item.product.id}}
+                    <br>
+                    price:$ {{cart_item.product.price}}
+                    <br>
+                    qty: {{cart_item.quantity}} X {{cart_item}}
+
+                </td>
+                <td>
+                    $ <b>{{cart_item.sub_total}}</b>
+                </td>
+                {% if cart_item.quantity < cart_item.product.stock %}
+                <td>
+                    &nbsp;<a href="{% url 'cart:add_cart' cart_item.product.id  %}" class="custome_a"> <i class="fa-solid fa-plus custome_icon"></i></a>
+                    &nbsp;<a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="custome_a"><i class="fa-solid fa-minus"></i></a>
+                    &nbsp;<a href="{% url 'cart:cart_delete' cart_item.product.id %}" class="custome_icon"><i class="fa-solid fa-trash"></i></a>
+
+                </td>
+                {% else %}
+                <td>
+                    &nbsp;<a href="" class="custome_a"><i class="fa-minus custome_icon"></i></a>
+                    &nbsp;<a href="" class="custome_icon"><i class="fa-delete-left custome_icon"></i></a>
+
+                </td>
+                {% endif %}
+            </tr>
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+    <div class="row-mx-auto">
+<div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center center" style="background-color: #fff;">
+    <table class="table my_custome_table">
+        <thead class="my_custome_thead">
+        <tr>
+            <th>
+                    Checkout
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                please review your shopping cart items before proceeding with the offer payment
+            </td>
+        </tr>
+        <tr>
+            <td class="text-center">
+                <strong>Your total amount is: {{total}}</strong>
+                <button>pay</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="mx-auto">
+        <a href="{% url 'shopapp:all_categories' %}" class="btn btn-secondary btn-block my_custome_button">continue shopping</a>
+    <br>
+        <br>
+    </div>
+    </div>
+{% endif %}
+
+</div>
+
+{% endblock %} {% endcomment %}
+{% load static %}
+{% block metadescription %}
+
+This is the CART page.proceed to your review and items
+{% endblock %}
+
+{% block title %}
+   Shop
+{% endblock %}
+
+{% block content %}
+{% if not cart_items %}
+<div xmlns="http://www.w3.org/1999/html">
+    <div class="text-center">
+        <br>
+        <h1 class="text-center my_title">your shoping cart is empty</h1>
+        <br>
+        <p class="text_center">
+            Please click <a href="{% url 'shopapp:all_categories' %}">Here</a>to continue shopping
+        </p>
+
+    </div>
+</div>
+{% else %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="text-center">
+                <br>
+                <h1 class="text-center my_title">Your Shopping Cart</h1>
+                <br>
+            </div>
+            <table class="table my_custom_table">
+                <thead class="my_custom_thead thead-dark">
+                    <tr>
+                        <th>Image</th>
+                        <th>Item</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart_item in cart_items %}
+                    <tr>
+                        <td><img src="{{ cart_item.product.image.url }}" alt="" class="rounded custome_image" width="100" height="100"></td>
+                        <td>
+                            {{ cart_item.product.name }}<br>
+                            SKU: {{ cart_item.product.id }}<br>
+                            Price: ${{ cart_item.product.price }}
+                        </td>
+                        <td>${{ cart_item.product.price }}</td>
+                        <td>{{ cart_item.quantity }}</td>
+                        <td>
+                            <a href="{% url 'cart:cart_remove' cart_item.product.id %}" class="btn btn-sm btn-outline-danger">-</a>
+                            <a href="{% url 'cart:cart_delete' cart_item.product.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                            <a href="{% url 'cart:add_cart' cart_item.product.id %}" class="btn btn-sm btn-outline-primary">+</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <div class="text-center">
+                <br>
+                <h1 class="text-center my_title">Checkout</h1>
+                <br>
+            </div>
+            <div class="text-center">
+                <p>Please review your shopping cart items before proceeding with the payment</p>
+                <p><strong>Your total amount is: ${{ total }}</strong></p>
+                <button class="btn btn-primary">Pay</button>
+                <br><br>
+                <a href="{% url 'shopapp:all_categories' %}" class="btn btn-secondary">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
